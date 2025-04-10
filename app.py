@@ -17,18 +17,12 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY')
 
-import requests
+import gdown
 
 def download_if_not_exists(url, filename):
     if not os.path.exists(filename):
-        print(f"Downloading {filename} from {url}...")
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open(filename, 'wb') as f:
-                f.write(response.content)
-            print(f"{filename} downloaded successfully.")
-        else:
-            raise Exception(f"Failed to download {filename} (status code {response.status_code})")
+        print(f"Downloading {filename} from {url} using gdown...")
+        gdown.download(url, filename, quiet=False)
 
 
 # Load the VGG19 model
@@ -55,6 +49,7 @@ try:
     vgg_model_url = 'https://drive.google.com/uc?id=1feKw46IU9su0wmxSh1mBocFXNhq63J1T'
     xgb_model_url = 'https://drive.google.com/uc?id=1qaFaKXekNJhPpjnETQAkjx8zoSQ1zB9b'
     scaler_url    = 'https://drive.google.com/uc?id=1utTu6tCqtC-56tmf2LtvXvc2M-HKnpVl'
+
 
     # Download models if not present
     download_if_not_exists(vgg_model_url, 'breast_cancer_vgg19.h5')
