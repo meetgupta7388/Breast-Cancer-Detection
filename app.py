@@ -106,7 +106,15 @@ app.config['SESSION_REFRESH_EACH_REQUEST'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 # Firebase Admin SDK setup
-cred = credentials.Certificate("firebase-auth.json")
+import json
+
+firebase_creds_json = os.getenv("FIREBASE_CREDS_JSON")
+if firebase_creds_json:
+    firebase_creds = json.loads(firebase_creds_json)
+    cred = credentials.Certificate(firebase_creds)
+else:
+    raise Exception("FIREBASE_CREDS_JSON is not set")
+
 firebase_admin.initialize_app(cred, {
     'storageBucket': os.getenv('FIREBASE_STORAGE_BUCKET'),
     'projectId': os.getenv('FIREBASE_PROJECT_ID')
