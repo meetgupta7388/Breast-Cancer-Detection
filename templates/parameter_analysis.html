@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="site-wrapper">
+    <div class="main-content">
+        <div class="container">
+            <h2 class="text-center mb-4">Parameter Analysis</h2>
+            
+            <div class="parameter-section">
+                <form id="parameterForm" class="parameter-form">
+                    <div class="parameter-grid">
+                        <div class="parameter-group">
+                            <label for="worst_concave_points">Worst Concave Points</label>
+                            <input type="number" id="worst_concave_points" name="worst_concave_points" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="worst_perimeter">Worst Perimeter</label>
+                            <input type="number" id="worst_perimeter" name="worst_perimeter" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="mean_concave_points">Mean Concave Points</label>
+                            <input type="number" id="mean_concave_points" name="mean_concave_points" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="worst_radius">Worst Radius</label>
+                            <input type="number" id="worst_radius" name="worst_radius" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="mean_perimeter">Mean Perimeter</label>
+                            <input type="number" id="mean_perimeter" name="mean_perimeter" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="worst_area">Worst Area</label>
+                            <input type="number" id="worst_area" name="worst_area" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="mean_radius">Mean Radius</label>
+                            <input type="number" id="mean_radius" name="mean_radius" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="mean_area">Mean Area</label>
+                            <input type="number" id="mean_area" name="mean_area" step="0.000000001" required>
+                        </div>
+                        <div class="parameter-group">
+                            <label for="mean_concavity">Mean Concavity</label>
+                            <input type="number" id="mean_concavity" name="mean_concavity" step="0.000000001" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="analyze-btn">Analyze Parameters</button>
+                </form>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="result-card">
+                    <div class="result-header">
+                        <h3>Analysis Results</h3>
+                        <span class="result-value" id="riskValue"></span>
+                    </div>
+                    <div class="result-details">
+                        <p><strong>Risk Level:</strong> <span id="riskLevel"></span></p>
+                        <p><strong>Confidence:</strong> <span id="confidence"></span></p>
+                        <p><strong>Analysis Date:</strong> <span id="analysisDate"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.site-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1 0 auto;
+    padding: 2rem 0;
+    margin-bottom: 4rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.parameter-section {
+    margin-bottom: 2rem;
+}
+
+.parameter-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.parameter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.parameter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.parameter-group label {
+    font-weight: 500;
+    color: #333;
+}
+
+.parameter-group input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.analyze-btn {
+    background: #007bff;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+}
+
+.results-section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.results-section.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.result-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.result-value {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.result-value.high {
+    background-color: #ff4444;
+    color: white;
+}
+
+.result-value.medium {
+    background-color: #ffbb33;
+    color: white;
+}
+
+.result-value.low {
+    background-color: #00C851;
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .main-content {
+        padding: 1rem 0;
+        margin-bottom: 3rem;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+
+    .parameter-form {
+        padding: 1.5rem;
+    }
+
+    .parameter-grid {
+        gap: 1.5rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const parameterForm = document.getElementById('parameterForm');
+    const resultsSection = document.getElementById('resultsSection');
+    const riskValue = document.getElementById('riskValue');
+    const riskLevel = document.getElementById('riskLevel');
+    const confidence = document.getElementById('confidence');
+    const analysisDate = document.getElementById('analysisDate');
+    const analyzeBtn = document.querySelector('.analyze-btn');
+
+    parameterForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Show loading state
+        resultsSection.style.display = 'none';
+        resultsSection.classList.remove('show');
+        analyzeBtn.disabled = true;
+        analyzeBtn.textContent = 'Analyzing...';
+        
+        // Get all form values
+        const formData = new FormData(parameterForm);
+        const parameters = {};
+        formData.forEach((value, key) => {
+            parameters[key] = parseFloat(value);
+        });
+
+        try {
+            console.log('Sending parameters:', parameters);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    analysis_type: 'parameter',
+                    parameters: parameters
+                })
+            });
+
+            const data = await response.json();
+            console.log('Received response:', data);
+            
+            if (response.ok) {
+                const prediction = data.prediction;
+                console.log('Processing prediction:', prediction);
+                
+                // Update UI with results
+                riskValue.textContent = prediction.class;
+                riskValue.className = 'result-value ' + (prediction.class.toLowerCase() === 'high' ? 'high' : 
+                    prediction.class.toLowerCase() === 'medium' ? 'medium' : 'low');
+                riskLevel.textContent = prediction.class;
+                confidence.textContent = `${prediction.confidence}%`;
+                analysisDate.textContent = new Date().toLocaleString();
+                
+                // Show results section with animation
+                resultsSection.style.display = 'block';
+                // Force a reflow
+                resultsSection.offsetHeight;
+                resultsSection.classList.add('show');
+                
+                console.log('Results section displayed');
+            } else {
+                console.error('Error response:', data);
+                alert('Error: ' + (data.error || 'Unknown error occurred'));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error analyzing parameters: ' + error.message);
+        } finally {
+            // Reset button state
+            analyzeBtn.disabled = false;
+            analyzeBtn.textContent = 'Analyze Parameters';
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>CancerGuard - How It Works</title>
+</head>
+<body>
+    {% include 'navbar_public.html' %}
+
+    <div class="page-header">
+        <h1>How It Works</h1>
+        <p>Learn about our simple three-step process for breast cancer detection</p>
+    </div>
+
+    <main class="page-content">
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Upload Image</h3>
+                <p>Upload your medical scan or image</p>
+                <div class="step-details">
+                    <ul>
+                        <li>Supports various image formats (DICOM, PNG, JPG)</li>
+                        <li>Secure upload with encryption</li>
+                        <li>Automatic image optimization</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>AI Analysis</h3>
+                <p>Our AI analyzes the image for potential abnormalities</p>
+                <div class="step-details">
+                    <ul>
+                        <li>Advanced pattern recognition</li>
+                        <li>Multiple detection algorithms</li>
+                        <li>Real-time processing</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Get Results</h3>
+                <p>Receive detailed analysis and recommendations</p>
+                <div class="step-details">
+                    <ul>
+                        <li>Comprehensive analysis report</li>
+                        <li>Risk assessment</li>
+                        <li>Recommended next steps</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Join thousands of healthcare professionals using CancerGuard</p>
+            <a href="{{ url_for('login') }}" class="btn btn-primary">Start Now</a>
+        </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='scripts.js') }}" type="module"></script>
+</body>
+</html> 

@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <a href="{{ url_for('dashboard') }}" class="navbar-brand">
+    <i class="fas fa-heartbeat"></i> CancerGuard
+  </a>
+  <div class="nav-links">
+    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    <div class="dropdown">
+      <a class="dropbtn">Analysis <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="{{ url_for('xray_analysis') }}">By X-Ray</a>
+        <a href="{{ url_for('parameter_analysis') }}">By Parameters</a>
+      </div>
+    </div>
+    <a href="{{ url_for('history') }}">History</a>
+    <div class="dropdown">
+      <a class="dropbtn">{{ session['user'].get('name', 'User') }} <i class="fas fa-chevron-down"></i></a>
+      <div class="dropdown-content">
+        <a href="{{ url_for('logout') }}">Logout</a>
+      </div>
+    </div>
+  </div>
+  <div class="hamburger">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="closebtn">
+    <i class="fas fa-times"></i>
+  </div>
+</nav>

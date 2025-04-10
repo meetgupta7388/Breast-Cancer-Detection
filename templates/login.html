@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>CancerGuard - Login</title>
+    <!-- Add Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  </head>
+
+  <body>
+    {% include 'navbar_public.html' %}
+
+    <main class="auth-container" style="min-height: calc(140vh);">
+      <div class="form-container">
+        <div class="auth-header">
+          <i class="fas fa-heartbeat"></i>
+          <h1>Welcome Back</h1>
+          <p>Login to your CancerGuard account</p>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="email-input">Email Address</label>
+            <input type="email" id="email-input" name="email" required>
+            <div id="email-error-message" class="error-msg"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="password-input">Password</label>
+            <input type="password" id="password-input" name="password" required>
+            <div id="password-error-message" class="error-msg"></div>
+          </div>
+
+          <div class="form-group">
+            <button type="button" id="sign-in-btn" class="btn btn-primary">Sign In</button>
+          </div>
+
+          <div class="divider">
+            <span>OR</span>
+          </div>
+
+          <div class="form-group">
+            <button type="button" id="sign-in-with-google-btn" class="btn btn-google">
+              <img src="{{ url_for('static', filename='images/google-icon.png') }}" alt="Google Icon" class="google-icon">
+              Sign in with Google
+            </button>
+            <div id="google-signin-error-message" class="error-msg"></div>
+          </div>
+
+          <div class="form-links">
+            <a href="{{ url_for('reset_password') }}">Forgot Password?</a>
+            <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign Up</a></p>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    
+    <!-- Initialize Firebase -->
+    <script>
+      const firebaseConfig = {
+        apiKey: "{{ config.FIREBASE_API_KEY }}",
+        authDomain: "{{ config.FIREBASE_AUTH_DOMAIN }}",
+        projectId: "{{ config.FIREBASE_PROJECT_ID }}",
+        storageBucket: "{{ config.FIREBASE_STORAGE_BUCKET }}",
+        messagingSenderId: "{{ config.FIREBASE_MESSAGING_SENDER_ID }}",
+        appId: "{{ config.FIREBASE_APP_ID }}"
+      };
+      
+      // Initialize Firebase
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      }
+    </script>
+    
+    <!-- Auth Script -->
+    <script src="{{ url_for('static', filename='login-auth.js') }}"></script>
+  </body>
+</html>

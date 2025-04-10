@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>CancerGuard - Features</title>
+</head>
+<body>
+    {% include 'navbar_public.html' %}
+
+    <div class="page-header">
+        <h1>Features</h1>
+        <p>Discover how CancerGuard is revolutionizing breast cancer detection</p>
+    </div>
+
+    <main class="page-content">
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-robot"></i>
+                <h3>AI-Powered Analysis</h3>
+                <p>Advanced machine learning algorithms for accurate detection</p>
+                <ul class="feature-details">
+                    <li>Deep learning models trained on extensive datasets</li>
+                    <li>Real-time analysis and results</li>
+                    <li>Continuous learning and improvement</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-clock"></i>
+                <h3>Early Detection</h3>
+                <p>Identify potential issues before they become serious</p>
+                <ul class="feature-details">
+                    <li>High sensitivity for early-stage detection</li>
+                    <li>Regular screening reminders</li>
+                    <li>Progress tracking over time</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Secure & Private</h3>
+                <p>Your data is protected with enterprise-grade security</p>
+                <ul class="feature-details">
+                    <li>HIPAA-compliant data handling</li>
+                    <li>End-to-end encryption</li>
+                    <li>Secure cloud storage</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Accurate Results</h3>
+                <p>High-precision detection with detailed analysis</p>
+                <ul class="feature-details">
+                    <li>95%+ accuracy rate</li>
+                    <li>Detailed analysis reports</li>
+                    <li>Second opinion validation</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='scripts.js') }}" type="module"></script>
+</body>
+</html> 
